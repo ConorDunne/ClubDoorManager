@@ -1,0 +1,36 @@
+{
+	"F01": {
+		"name": "Peter Peterson",
+		"membershipPaid": true,
+		"attended": [
+			"2021-10-02",
+			"2021-10-09",
+			"2021-10-16",
+			"2021-10-30"
+		],
+		"balance": 0.00
+	},
+	"F02": {
+		"name": "John Johnson",
+		"membershipPaid": true,
+		"attended": [
+			"2021-10-02",
+			"2021-10-09",
+			"2021-10-16",
+			"2021-10-23",
+			"2021-10-30"
+		],
+		"balance": 3.50
+	},
+	"F03": {
+		"name": "Kyle Moore",
+		"membershipPaid": false,
+		"attended": [
+			"2021-10-02",
+			"2021-10-23",
+			"2021-10-30"
+		],
+		"balance": 7.00,
+		"comment": "Do not let Kyle in until he pays his membership!"
+	}
+}
