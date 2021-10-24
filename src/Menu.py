@@ -5,6 +5,7 @@ from Member import Member
 
 class MenuWindow(tkinter.Tk):
 	members = None
+	memberID = None
 
 	def __init__(self, master=None):
 		self.members = []
@@ -17,21 +18,30 @@ class MenuWindow(tkinter.Tk):
 		ioFrame = tkinter.Frame(self.master)
 		ioFrame.pack()
 
-		importFile = tkinter.Button(ioFrame, text = "Import", command = self.importJson).grid(row = 1, column = 0)
-		exportFile = tkinter.Button(ioFrame, text = "Export", command = self.exportJson).grid(row = 1, column = 1)
+		importFile = tkinter.Button(ioFrame, text = "Import", command = self.importJson)
+		exportFile = tkinter.Button(ioFrame, text = "Export", command = self.exportJson)
+		importFile.grid(row = 1, column = 0)
+		exportFile.grid(row = 1, column = 1)
+
 
 		searchFrame = tkinter.Frame(self.master)  
 		searchFrame.pack()
 
-		search = tkinter.Label(searchFrame,text = "Member ID").grid(row = 0, column = 0)  
-		memberID = tkinter.Entry(searchFrame).grid(row = 0, column = 1)
-		memberSearch = tkinter.Button(searchFrame, text = "Search").grid(row = 0, column = 2)
+		search = tkinter.Label(searchFrame,text = "Member ID")  
+		self.memberID = tkinter.Entry(searchFrame)		
+		memberSearch = tkinter.Button(searchFrame, text = "Search", command = self.memberSearch)
+		search.grid(row = 0, column = 0)
+		self.memberID.grid(row = 0, column = 1)
+		memberSearch.grid(row = 0, column = 2)
+
 
 		manageFrame = tkinter.Frame(self.master)
 		manageFrame.pack()
 
-		newMember = tkinter.Button(manageFrame, text = "New Member").grid(row = 1, column = 0)
-		barcode = tkinter.Button(manageFrame, text = "Barcode Reader").grid(row = 1, column = 1)
+		newMember = tkinter.Button(manageFrame, text = "New Member")
+		barcode = tkinter.Button(manageFrame, text = "Barcode Reader")
+		newMember.grid(row = 1, column = 0)
+		barcode.grid(row = 1, column = 1)
 
 	def onExit(self):
 		self.master.destroy()
@@ -59,3 +69,12 @@ class MenuWindow(tkinter.Tk):
 		f = open(filename, "w")
 		f.write(jsonFile)
 		f.close()
+	
+	def memberSearch(self):
+		id = self.memberID.get()
+
+		for m in self.members:
+			if m.memberId == id:
+				print(m.toJson())
+				break
+			
