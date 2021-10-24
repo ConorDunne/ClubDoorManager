@@ -1,15 +1,24 @@
+import json
 import tkinter
+from tkinter import filedialog as fd
+from Member import Member
 
 class MenuWindow(tkinter.Tk):
+	members = None
+
 	def __init__(self, master=None):
-		self.master=master		
+		self.members = []
+		self.master=master
+		self.createWindow()
+
+	def createWindow(self):
 		self.master.geometry('400x100')
 
 		ioFrame = tkinter.Frame(self.master)
 		ioFrame.pack()
 
-		importFile = tkinter.Button(ioFrame, text = "Import").grid(row = 1, column = 0)
-		exportFile = tkinter.Button(ioFrame, text = "Export").grid(row = 1, column = 1)
+		importFile = tkinter.Button(ioFrame, text = "Import", command = self.importJson).grid(row = 1, column = 0)
+		exportFile = tkinter.Button(ioFrame, text = "Export", command = self.exportJson).grid(row = 1, column = 1)
 
 		searchFrame = tkinter.Frame(self.master)  
 		searchFrame.pack()
@@ -27,25 +36,26 @@ class MenuWindow(tkinter.Tk):
 	def onExit(self):
 		self.master.destroy()
 
-	def test(self):
-		print("hello")
+	def importJson(self):
+		filename = fd.askopenfilename()
+		
+		with open(filename, 'r') as file:
+			data = file.read()
+		
+		obj = json.loads(data)
 
-"""
+		for info in obj:
+			self.members.append(Member(info, obj[info]))
+	
+	def exportJson(self):
+		filename = fd.asksaveasfilename()
+		out = {}
 
-top = Tk()
-top.geometry("400x250")
+		for m in self.members:
+			out[m.memberId] = m.toJson()
 
-searchFrame = Frame(top)  
-searchFrame.pack()
+		jsonFile = json.dumps(out)
 
-search = Label(searchFrame,text = "Member ID").grid(row = 0, column = 0)  
-memberID = Entry(searchFrame).grid(row = 0, column = 1)
-memberSearch = Button(searchFrame, text = "Search").grid(row = 0, column = 2)
-
-manageFrame = Frame(top)
-manageFrame.pack()
-
-newMember = Button(manageFrame, text = "New Member").grid(row = 1, column = 0)
-barcode = Button(manageFrame, text = "Barcode Reader").grid(row = 1, column = 1)
-
-"""
+		f = open(filename, "w")
+		f.write(jsonFile)
+		f.close()
