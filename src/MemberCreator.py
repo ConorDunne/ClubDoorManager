@@ -6,7 +6,7 @@ class MemberCreator(tkinter.Toplevel):
 
 	def __init__(self, memberId, master = None):
 		super().__init__(master = master)
-		self.createWindow(str(memberId))
+		self.createWindow(memberId)
 
 	def createWindow(self, memberId):
 		self.geometry("500x500")

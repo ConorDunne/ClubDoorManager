@@ -1,6 +1,7 @@
 import json
 import tkinter
 from tkinter import filedialog as fd
+from tkinter import messagebox
 from Member import Member
 from MemberManager import MemberManager
 from MemberCreator import MemberCreator
@@ -73,13 +74,21 @@ class MenuWindow(tkinter.Tk):
 		f.close()
 	
 	def memberSearch(self):
+		found = False
 		id = self.memberID.get()
 
 		for m in self.members:
 			if m.memberId == id:
 				window = MemberManager(m, self.master)
+				found = True
 				break
 	
+		if not found:
+			messagebox.showinfo("Error","User not found")  
+	
 	def createMember(self):
-		m = self.members[-1].memberId
-		window = MemberCreator(int(m)+1, self.master)
+		if not self.members:
+			window = MemberCreator("0", self.master)
+		else:
+			m = self.members[-1].memberId
+			window = MemberCreator(str(int(m)+1), self.master)
