@@ -18,8 +18,7 @@
 			"2021-10-16",
 			"2021-10-23",
 			"2021-10-30"
-		],
-		"balance": 3.50
+		]
 	},
 	"F03": {
 		"name": "Kyle Moore",
@@ -29,7 +28,6 @@
 			"2021-10-23",
 			"2021-10-30"
 		],
-		"balance": 7.00,
 		"comment": "Do not let Kyle in until he pays his membership!"
 	}
 }
