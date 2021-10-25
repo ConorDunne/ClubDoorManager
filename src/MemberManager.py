@@ -2,7 +2,7 @@ import tkinter
 from tkinter import scrolledtext
 from Member import Member
 
-class MemberWindow(tkinter.Toplevel):
+class MemberManager(tkinter.Toplevel):
 	member = None
 
 	def __init__(self, member, master = None):

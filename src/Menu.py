@@ -2,7 +2,7 @@ import json
 import tkinter
 from tkinter import filedialog as fd
 from Member import Member
-from MemberWindow import MemberWindow
+from MemberManager import MemberManager
 
 class MenuWindow(tkinter.Tk):
 	members = None
@@ -76,10 +76,9 @@ class MenuWindow(tkinter.Tk):
 
 		for m in self.members:
 			if m.memberId == id:
-				print(m.toJson())
-				window = MemberWindow(m, self.master)
+				window = MemberManager(m, self.master)
 				break
 	
 	def createMember(self):
 		member = self.members[2]
-		window = MemberWindow(member, self.master)
+		window = MemberManager(member, self.master)
