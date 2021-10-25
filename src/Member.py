@@ -2,7 +2,7 @@ class Member:
 	memberId = None
 	name = None
 	membershipPaid = None
-	attendance = None
+	attended = None
 	balance = None
 	comment = None
 
@@ -17,9 +17,9 @@ class Member:
 			self.balance = 0.0
 
 		if "attended" in details:
-			self.attendance = details["attended"]
+			self.attended = details["attended"]
 		else:
-			self.attendance = []
+			self.attended = []
 
 		if "comment" in details:
 			self.comment = details["comment"]
@@ -34,8 +34,8 @@ class Member:
 
 		if self.balance != 0.0:
 			out["balance"] = self.balance
-		if self.attendance:
-			out["attended"] = self.attendance
+		if self.attended:
+			out["attended"] = self.attended
 		if self.comment != "":
 			out["comment"] = self.comment
 		

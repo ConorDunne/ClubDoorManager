@@ -2,6 +2,7 @@ import json
 import tkinter
 from tkinter import filedialog as fd
 from Member import Member
+from MemberWindow import MemberWindow
 
 class MenuWindow(tkinter.Tk):
 	members = None
@@ -27,7 +28,7 @@ class MenuWindow(tkinter.Tk):
 		searchFrame = tkinter.Frame(self.master)  
 		searchFrame.pack()
 
-		search = tkinter.Label(searchFrame,text = "Member ID")  
+		search = tkinter.Label(searchFrame, text = "Member ID")  
 		self.memberID = tkinter.Entry(searchFrame)		
 		memberSearch = tkinter.Button(searchFrame, text = "Search", command = self.memberSearch)
 		search.grid(row = 0, column = 0)
@@ -38,7 +39,7 @@ class MenuWindow(tkinter.Tk):
 		manageFrame = tkinter.Frame(self.master)
 		manageFrame.pack()
 
-		newMember = tkinter.Button(manageFrame, text = "New Member")
+		newMember = tkinter.Button(manageFrame, text = "New Member", command = self.createMember)
 		barcode = tkinter.Button(manageFrame, text = "Barcode Reader")
 		newMember.grid(row = 1, column = 0)
 		barcode.grid(row = 1, column = 1)
@@ -76,5 +77,9 @@ class MenuWindow(tkinter.Tk):
 		for m in self.members:
 			if m.memberId == id:
 				print(m.toJson())
+				window = MemberWindow(m, self.master)
 				break
-			
+	
+	def createMember(self):
+		member = self.members[2]
+		window = MemberWindow(member, self.master)
