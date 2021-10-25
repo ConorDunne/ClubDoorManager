@@ -1,10 +1,13 @@
 import json
+
 import tkinter
 from tkinter import filedialog as fd
 from tkinter import messagebox
+
 from Member import Member
 from MemberManager import MemberManager
 from MemberCreator import MemberCreator
+from MemberList import MemberList
 
 class MenuWindow(tkinter.Tk):
 	members = None
@@ -43,8 +46,10 @@ class MenuWindow(tkinter.Tk):
 
 		newMember = tkinter.Button(manageFrame, text = "New Member", command = self.createMember)
 		barcode = tkinter.Button(manageFrame, text = "Barcode Reader")
+		listMembers = tkinter.Button(manageFrame, text = "List Members", command = self.viewMemberList)
 		newMember.grid(row = 1, column = 0)
 		barcode.grid(row = 1, column = 1)
+		listMembers.grid(row = 1, column = 2)
 
 	def onExit(self):
 		self.master.destroy()
@@ -93,3 +98,6 @@ class MenuWindow(tkinter.Tk):
 			m = self.members[-1].memberId
 			id = str(int(m)+1)
 			window = MemberCreator(id, self.members, self.master)
+		
+	def viewMemberList(self):
+		window = MemberList(self.members, self.master)
