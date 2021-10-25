@@ -88,7 +88,8 @@ class MenuWindow(tkinter.Tk):
 	
 	def createMember(self):
 		if not self.members:
-			window = MemberCreator("0", self.master)
+			window = MemberCreator("0", self.master, self.master)
 		else:
 			m = self.members[-1].memberId
-			window = MemberCreator(str(int(m)+1), self.master)
+			id = str(int(m)+1)
+			window = MemberCreator(id, self.members, self.master)
