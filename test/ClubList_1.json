@@ -1,5 +1,5 @@
 {
-	"F01": {
+	"1": {
 		"name": "Peter Peterson",
 		"membershipPaid": true,
 		"attended": [
@@ -9,7 +9,7 @@
 			"2021-10-30"
 		]
 	},
-	"F02": {
+	"2": {
 		"name": "John Johnson",
 		"membershipPaid": true,
 		"attended": [
@@ -20,7 +20,7 @@
 			"2021-10-30"
 		]
 	},
-	"F03": {
+	"3": {
 		"name": "Kyle Moore",
 		"membershipPaid": false,
 		"attended": [

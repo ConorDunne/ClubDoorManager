@@ -12,7 +12,7 @@ class MemberManager(tkinter.Toplevel):
 
 	def createWindow(self):
 		self.geometry("500x500")
-		self.title("Club Door Manager - Member")
+		self.title("Club Door Manager - Member Manager")
 
 		personalFrame = tkinter.Frame(self)
 		personalFrame.pack()

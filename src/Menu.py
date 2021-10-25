@@ -3,6 +3,7 @@ import tkinter
 from tkinter import filedialog as fd
 from Member import Member
 from MemberManager import MemberManager
+from MemberCreator import MemberCreator
 
 class MenuWindow(tkinter.Tk):
 	members = None
@@ -80,5 +81,5 @@ class MenuWindow(tkinter.Tk):
 				break
 	
 	def createMember(self):
-		member = self.members[2]
-		window = MemberManager(member, self.master)
+		m = self.members[-1].memberId
+		window = MemberCreator(int(m)+1, self.master)
