@@ -9,6 +9,8 @@ from MemberManager import MemberManager
 from MemberCreator import MemberCreator
 from MemberList import MemberList
 
+from NFC_Reader import ReadCard
+
 class MenuWindow(tkinter.Tk):
 	members = None
 	memberID = None
@@ -35,11 +37,12 @@ class MenuWindow(tkinter.Tk):
 
 		search = tkinter.Label(searchFrame, text = "Member ID")  
 		self.memberID = tkinter.Entry(searchFrame)		
-		memberSearch = tkinter.Button(searchFrame, text = "Search", command = self.memberSearch)
+		memberSearch = tkinter.Button(searchFrame, text = "Search", command = self.memberSearchID)
+		memberCard = tkinter.Button(searchFrame, text = "Scan Card", command = self.memberSearchCard)
 		search.grid(row = 0, column = 0)
 		self.memberID.grid(row = 0, column = 1)
 		memberSearch.grid(row = 0, column = 2)
-
+		memberCard.grid(row = 0, column = 3)
 
 		manageFrame = tkinter.Frame(self.master)
 		manageFrame.pack()
@@ -78,7 +81,7 @@ class MenuWindow(tkinter.Tk):
 		f.write(jsonFile)
 		f.close()
 	
-	def memberSearch(self):
+	def memberSearchID(self):
 		found = False
 		id = self.memberID.get()
 
@@ -89,7 +92,22 @@ class MenuWindow(tkinter.Tk):
 				break
 	
 		if not found:
-			messagebox.showinfo("Error","User not found")  
+			messagebox.showinfo("Error","User not found")
+
+	def memberSearchCard(self):
+		found = False
+		card = ReadCard()
+
+		for m in self.members:
+			membersCards = m.card
+			for c in membersCards:
+				if card == c:
+					window = MemberManager(m, self.master)
+					found = True
+					break
+	
+		if not found:
+			messagebox.showinfo("Error","User not found")
 	
 	def createMember(self):
 		if not self.members:
