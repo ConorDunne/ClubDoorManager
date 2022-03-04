@@ -4,6 +4,8 @@ from tkinter import messagebox
 from Member import Member
 from datetime import date
 
+from NFC_Reader import ReadCard
+
 class MemberManager(tkinter.Toplevel):
 	member = None
 
@@ -15,11 +17,17 @@ class MemberManager(tkinter.Toplevel):
 		super().__init__(master = master)
 		self.member = member
 		self.membershipPaid = self.member.membershipPaid
-		self.signedIn = False
+
+		today = str(date.today())
+		if today not in self.member.attended:
+			self.signedIn = False
+		else:
+			self.signedIn = True
+		
 		self.createWindow()
 
 	def createWindow(self):
-		self.geometry("500x500")
+		self.geometry("500x600")
 		self.title("Club Door Manager - Member Manager")
 
 		personalFrame = tkinter.Frame(self)
@@ -39,12 +47,16 @@ class MemberManager(tkinter.Toplevel):
 		attendFrame = tkinter.Frame(self)
 		attendFrame.pack()
 
-		attendButton = tkinter.Button(attendFrame, text = "Sign in", command = self.memberSignedIn)
-		attendButton.grid(row = 0, column = 0)
+		if not self.signedIn:
+			attendButton = tkinter.Button(attendFrame, text = "Sign in", command = self.memberSignedIn)
+			attendButton.pack()
+
+		assignButton = tkinter.Button(attendFrame, text = "Assign card", command = self.assignMembershipCard)
+
 		if not self.member.membershipPaid:
 			membershipPayment = tkinter.Button(attendFrame, text = "Pay Membership", command = self.membershipPaymentMade)
-			membershipPayment.grid(row = 0, column = 1)
-
+			membershipPayment.pack()
+		assignButton.pack()
 
 		commentFrame = tkinter.LabelFrame(self, text="Member Comments")
 		commentFrame.pack(fill="both", expand="yes")
@@ -74,6 +86,10 @@ class MemberManager(tkinter.Toplevel):
 				messagebox.showinfo("Error","User already logged in today")  
 
 		self.onExit()
+
+	def assignMembershipCard(self):
+		card = ReadCard()
+		self.member.card.append(card)
 
 	def onExit(self):
 		self.destroy()
