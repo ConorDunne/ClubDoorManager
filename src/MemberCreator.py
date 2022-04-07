@@ -1,5 +1,6 @@
 import tkinter
 from tkinter import scrolledtext
+from tkinter import messagebox
 
 from Member import Member
 from NFC_Reader import ReadCard
@@ -63,8 +64,12 @@ class MemberCreator(tkinter.Toplevel):
 
 	def assignMembershipCard(self):
 		card = ReadCard()
-		print(card)
-		self.card.append(card)
+
+		if card == -1:
+			messagebox.showinfo("Error", "No card detected")
+		else:
+			print(card)
+			self.card.append(card)
 
 	def onExit(self):
 		self.destroy()

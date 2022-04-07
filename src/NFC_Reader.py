@@ -45,8 +45,8 @@ class NFC_Reader():
 def ReadCard():
 	r = NFC_Reader()
 
-	while not r.CardPresent():
-		continue;
+	if not r.CardPresent():
+		return -1;
 
 	return r.GetUID()
 

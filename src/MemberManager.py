@@ -89,7 +89,11 @@ class MemberManager(tkinter.Toplevel):
 
 	def assignMembershipCard(self):
 		card = ReadCard()
-		self.member.card.append(card)
+		
+		if card == -1:
+			messagebox.showinfo("Error", "No card detected")
+		else:
+			self.member.card.append(card)
 
 	def onExit(self):
 		self.destroy()
